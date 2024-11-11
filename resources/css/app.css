@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* input color */
+  input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    width: 100%;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+  }
+  /* input color end */
+
+  /* input color number */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  /* scrollbar end */
+}
+
+@layer components {
+  .sidebar-link {
+    @apply rounded-md text-gray-500 hover:text-violet-600 flex flex-col sm:flex-row sm:hover:bg-violet-200 sm:justify-start sm:px-3 sm:py-1 sm:rounded sm:gap-2 text-xs sm:text-sm sm:[&>p]:translate-y-[1px] sm:font-medium items-center justify-center duration-200;
+  }
+  .link-active {
+    @apply sm:!bg-violet-200 !text-violet-600;
+  }
+  .input-error {
+    @apply focus-within:!border-violet-600 !border-red-500;
+  }
+}
+
+/* vue transision */
+
+/* list transition */
+.list-enter-active,
+.list-leave-active {
+  @apply duration-200;
+}
+.list-enter-from,
+.list-leave-to {
+  @apply opacity-0 -translate-y-3;
+}
+.list-enter-to,
+.list-leave-from {
+  @apply opacity-100;
+}
+/* list transition end */
+
+/* fade */
+.fade-enter-active,
+.fade-leave-active {
+  @apply duration-200;
+}
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  @apply opacity-100;
+}
+/* fade end */
+
+/* fade responsive */
+.fade-responsive-enter-active,
+.fade-responsive-leave-active {
+  @apply duration-200;
+}
+.fade-responsive-enter-from,
+.fade-responsive-leave-to {
+  @apply -translate-y-5 sm:translate-y-5 opacity-0;
+}
+.fade-responsive-enter-to,
+.fade-responsive-leave-from {
+  @apply translate-y-0 opacity-100;
+}
+/* fade responsive end */
+
+/* dropdown */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  @apply duration-150;
+}
+.dropdown-enter-from,
+.dropdown-leave-to {
+  @apply opacity-0 scale-95;
+}
+.dropdown-enter-to,
+.dropdown-leave-from {
+  @apply opacity-100 scale-100;
+}
+/* dropdown end */
