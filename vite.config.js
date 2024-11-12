@@ -18,8 +18,5 @@ export default defineConfig({
         },
       },
     }),
-    removeConsole({
-      custom: ["console.log()", "console.info()"],
-    }),
   ],
 });

@@ -1,6 +1,9 @@
 <script setup>
 import Button from "@/Components/Buttons/Button.vue";
+import Paginations from "@/Components/Paginations.vue";
+import { useOpenModal } from "@/Composables/openModal";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { useLayout } from "@/Stores";
 import {
   NewspaperIcon,
   PencilSquareIcon,
@@ -13,15 +16,12 @@ import {
   StarIcon,
   TrashIcon,
 } from "@heroicons/vue/24/outline";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useDateFormat } from "@vueuse/core";
-import { ref } from "vue";
-import ModalCreate from "./Partials/ModalCreate.vue";
 import Actions from "./Partials/Actions.vue";
-import ModalEdit from "./Partials/ModalEdit.vue";
+import ModalCreate from "./Partials/ModalCreate.vue";
 import ModalDelete from "./Partials/ModalDelete.vue";
-import { useLayout } from "@/Stores";
-import { useOpenModal } from "@/Composables/openModal";
+import ModalEdit from "./Partials/ModalEdit.vue";
 
 const { isGrid, toggleGrid } = useLayout("statusLayout");
 const props = defineProps({
@@ -56,9 +56,7 @@ const updatePin = (status) => {
       is_pinned: !statusData.value.is_pinned,
     }))
     .put(route("status.update", statusData.value.id), {
-      onSuccess: () => {
-        isModalEditOpen.value = false;
-      },
+      onSuccess: () => (isModalEditOpen.value = false),
     });
 };
 </script>
@@ -121,12 +119,17 @@ const updatePin = (status) => {
                 />
               </td>
               <td>
-                {{ status.name }}
+                <Link
+                  :href="route('status.show', status.slug)"
+                  :class="status.series.length > 0 ? 'underline' : ''"
+                >
+                  {{ status.name }}
+                </Link>
               </td>
               <td
                 class="text-sm hidden min-[470px]:table-cell text-gray-700 font-medium"
               >
-                20
+                {{ status.series.length }}
               </td>
               <td
                 class="text-sm hidden min-[400px]:table-cell text-gray-700 font-medium"
@@ -190,11 +193,22 @@ const updatePin = (status) => {
                 status.is_pinned == true ? 'text-amber-400' : 'text-gray-400'
               "
             />
-            <NewspaperIcon class="size-9 text-gray-500 mt-4" />
+            <Link :href="route('status.show', status.slug)">
+              <NewspaperIcon class="size-9 text-gray-500 mt-4" />
+            </Link>
             <div class="flex justify-between items-center w-full">
               <div class="flex flex-col text-start">
-                <h3 class="text-sm font-semibold">{{ status.name }}</h3>
-                <small class="text-xs opacity-50">20 Series</small>
+                <Link :href="route('status.show', status.slug)">
+                  <h3
+                    class="text-sm font-semibold"
+                    :class="status.series.length > 0 ? 'underline' : ''"
+                  >
+                    {{ status.name }}
+                  </h3>
+                </Link>
+                <small class="text-xs opacity-50"
+                  >{{ status.series.length }} Series</small
+                >
               </div>
               <Actions
                 trigger-class="translate-y-1"
@@ -208,6 +222,9 @@ const updatePin = (status) => {
         </TransitionGroup>
       </div>
     </section>
+
+    <Paginations :pagination="props.statuses" />
+
     <ModalCreate
       :is-open="isModalCreateOpen"
       @close="isModalCreateOpen = false"

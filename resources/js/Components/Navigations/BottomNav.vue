@@ -1,10 +1,10 @@
 <script setup>
 import {
-  PlusIcon,
   BookOpenIcon as BookOpenIconSolid,
   GlobeAltIcon as GlobeAltIconSolid,
-  NewspaperIcon as NewspaperIconSolid,
   HomeIcon as HomeIconSolid,
+  NewspaperIcon as NewspaperIconSolid,
+  PlusIcon,
 } from "@heroicons/vue/20/solid";
 import {
   BookOpenIcon,

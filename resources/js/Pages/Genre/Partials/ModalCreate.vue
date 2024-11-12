@@ -6,7 +6,7 @@ import InputGroup from "@/Components/Forms/InputGroup.vue";
 import { DialogPanel, DialogTitle, MenuItem } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/20/solid";
 import { useForm } from "@inertiajs/vue3";
-import { computed, watchEffect } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },

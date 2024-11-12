@@ -15,14 +15,10 @@ const disabled = ref(false);
 
 const deleteCategory = () => {
   router.delete(route("category.destroy", props.data.id), {
-    onStart: () => {
-      disabled.value = true;
-    },
+    onStart: () => (disabled.value = true),
+    onFinish: () => (disabled.value = false),
     onSuccess: () => {
       emits("close");
-    },
-    onFinish: () => {
-      disabled.value = false;
     },
   });
 };

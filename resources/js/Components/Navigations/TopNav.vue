@@ -1,8 +1,8 @@
 <script setup>
+import { useSidebar } from "@/Stores";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 import Button from "../Buttons/Button.vue";
 import DropdpownProfile from "../Dropdown/DropdpownProfile.vue";
-import { useSidebar } from "@/Stores";
 
 const { toggleOpen } = useSidebar();
 </script>

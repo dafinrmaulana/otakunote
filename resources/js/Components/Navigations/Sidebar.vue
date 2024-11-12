@@ -1,12 +1,15 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Link, router } from "@inertiajs/vue3";
+import Button from "@/Components/Buttons/Button.vue";
+import { useLayout, useSidebar } from "@/Stores";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { ChevronDownIcon } from "@heroicons/vue/16/solid";
 import {
-  XMarkIcon,
   BookOpenIcon as BookOpenIconSolid,
   GlobeAltIcon as GlobeAltIconSolid,
   HomeIcon as HomeIconSolid,
   NewspaperIcon as NewspaperIconSolid,
+  XMarkIcon,
 } from "@heroicons/vue/20/solid";
 import {
   BookOpenIcon,
@@ -14,12 +17,15 @@ import {
   HomeIcon,
   NewspaperIcon,
 } from "@heroicons/vue/24/outline";
-import Button from "@/Components/Buttons/Button.vue";
-import { useSidebar } from "@/Stores";
-import { onMounted } from "vue";
-import { ChevronDownIcon } from "@heroicons/vue/16/solid";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 
+const page = usePage();
 const { isOpen } = useSidebar();
+const { isGrid: isSeriesOpen, toggleGrid: toggleSeries } =
+  useLayout("linkSeries");
+const { isGrid: isCategoriesOpen, toggleGrid: toggleCategoriesOpen } =
+  useLayout("linkCategories");
 const featureLinks = [
   {
     title: "Home",
@@ -50,13 +56,13 @@ const featureLinks = [
     url: "/category",
   },
 ];
+const series = computed(() => page.props.links.pinned_series);
+const categories = computed(() => page.props.links.pinned_categories);
 
 if (window.innerWidth < 1024) {
   router.on("finish", () => {
     isOpen.value = false;
   });
-} else if (window.innerWidth > 1024) {
-  isOpen.value = true;
 }
 </script>
 
@@ -82,9 +88,9 @@ if (window.innerWidth < 1024) {
     </div>
 
     <div class="flex flex-col gap-1">
-      <span class="text-sm text-slate-400 flex items-center">
+      <span class="hidden text-slate-400 sm:flex items-center">
         <small>Features</small>
-        <ChevronDownIcon class="size-3" />
+        <ChevronDownIcon class="size-4" />
       </span>
       <template v-for="link in featureLinks" :key="link.title">
         <Link
@@ -96,8 +102,75 @@ if (window.innerWidth < 1024) {
             :is="$page.url === link.url ? link.activeIcon : link.icon"
             class="size-6 flex-none"
           />
-          <p>{{ link.title }}</p>
+          <p class="flex-1">{{ link.title }}</p>
         </Link>
+      </template>
+      <template v-if="series.length > 0">
+        <Disclosure :default-open="isSeriesOpen">
+          <DisclosureButton
+            @click="toggleSeries"
+            class="text-slate-400 flex items-center mt-3"
+          >
+            <small>Series</small>
+            <ChevronDownIcon
+              class="size-4 duration-150"
+              :class="!isSeriesOpen ? '-rotate-90' : ''"
+            />
+          </DisclosureButton>
+          <transition name="list">
+            <div v-show="isSeriesOpen">
+              <DisclosurePanel static>
+                <Link
+                  v-for="link in series"
+                  :key="link.title"
+                  :href="route('series.show', link.slug)"
+                  class="sidebar-link-no-res mt-1"
+                  :class="
+                    $page.url === `/series/${link.slug}` ? 'link-active' : ''
+                  "
+                >
+                  <div class="size-4 bg-violet-600 rounded-full flex-none" />
+                  <p class="line-clamp-1 flex-1">{{ link.title }}</p>
+                </Link>
+              </DisclosurePanel>
+            </div>
+          </transition>
+        </Disclosure>
+      </template>
+      <template v-if="categories.length > 0">
+        <Disclosure>
+          <DisclosureButton
+            @click="toggleCategoriesOpen"
+            class="flex items-center mt-3 text-slate-400"
+          >
+            <small>Categories</small>
+            <ChevronDownIcon
+              class="size-4 duration-150"
+              :class="!isCategoriesOpen ? '-rotate-90' : ''"
+            />
+          </DisclosureButton>
+          <transition name="list">
+            <div v-show="isCategoriesOpen">
+              <DisclosurePanel static>
+                <Link
+                  v-for="link in categories"
+                  :key="link.name"
+                  :href="route('category.show', link.slug)"
+                  class="sidebar-link-no-res mt-1"
+                  :class="
+                    $page.url === `/category/${link.slug}` ? 'link-active' : ''
+                  "
+                >
+                  <div
+                    class="size-4 rounded-full flex-none"
+                    :style="{ backgroundColor: link.color }"
+                  />
+                  <p class="line-clamp-1 flex-1">{{ link.name }}</p>
+                </Link>
+              </DisclosurePanel>
+            </div>
+          </transition>
+        </Disclosure>
       </template>
     </div>
   </aside>

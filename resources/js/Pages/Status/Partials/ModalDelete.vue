@@ -5,6 +5,7 @@ import { DialogDescription, DialogPanel, DialogTitle } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/20/solid";
 import { router } from "@inertiajs/vue3";
 import { ref } from "vue";
+
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
   data: { type: Object, default: {} },
@@ -15,15 +16,9 @@ const disabled = ref(false);
 
 const deleteStatus = () => {
   router.delete(route("status.destroy", props.data.id), {
-    onStart: () => {
-      disabled.value = true;
-    },
-    onSuccess: () => {
-      emits("close");
-    },
-    onFinish: () => {
-      disabled.value = false;
-    },
+    onStart: () => (disabled.value = true),
+    onSuccess: () => emits("close"),
+    onFinish: () => (disabled.value = false),
   });
 };
 </script>

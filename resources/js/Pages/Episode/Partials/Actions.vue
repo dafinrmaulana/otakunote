@@ -3,8 +3,6 @@ import Dropdown from "@/Components/Dropdown/Dropdown.vue";
 import { MenuItem } from "@headlessui/vue";
 import { EllipsisVerticalIcon } from "@heroicons/vue/16/solid";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/20/solid";
-import { StarIcon } from "@heroicons/vue/24/outline";
-import { StarIcon as StarIconSolid } from "@heroicons/vue/20/solid";
 
 const props = defineProps({
   contentClass: { type: String, default: "" },

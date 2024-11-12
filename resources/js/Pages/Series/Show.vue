@@ -1,18 +1,18 @@
 <script setup>
 import BadgeStatus from "@/Components/BadgeStatus.vue";
+import Button from "@/Components/Buttons/Button.vue";
 import { getImage } from "@/Composables/getImage";
+import { useOpenModal } from "@/Composables/openModal";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { StarIcon } from "@heroicons/vue/16/solid";
+import { PlusIcon } from "@heroicons/vue/20/solid";
 import { ArrowLeftIcon } from "@heroicons/vue/24/outline";
 import { Head } from "@inertiajs/vue3";
-import { ref, watchEffect } from "vue";
-import ModalEpisodeCreate from "./Partials/ModalEpisodeCreate.vue";
-import ActionsEpisode from "./Partials/ActionsEpisode.vue";
+import { ref } from "vue";
 import ModalDelete from "../Episode/Partials/ModalDelete.vue";
-import { useOpenModal } from "@/Composables/openModal";
+import ActionsEpisode from "./Partials/ActionsEpisode.vue";
+import ModalEpisodeCreate from "./Partials/ModalEpisodeCreate.vue";
 import ModalEpisodeEdit from "./Partials/ModalEpisodeEdit.vue";
-import Button from "@/Components/Buttons/Button.vue";
-import { PlusIcon } from "@heroicons/vue/20/solid";
 
 const props = defineProps({
   series: { type: Object },

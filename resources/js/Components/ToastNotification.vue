@@ -1,8 +1,8 @@
 <script setup>
 import { CheckIcon, XMarkIcon } from "@heroicons/vue/16/solid";
-import Button from "./Buttons/Button.vue";
-import { computed, nextTick, ref, watch, watchEffect } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import { computed, ref, watch } from "vue";
+import Button from "./Buttons/Button.vue";
 
 const isShow = ref(false);
 const page = computed(() => usePage());

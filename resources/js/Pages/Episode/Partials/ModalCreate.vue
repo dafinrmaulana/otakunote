@@ -28,10 +28,7 @@ const save = () => {
   router.post(
     route("episode.store"),
     {
-      number: form.number,
-      source_url: form.source_url,
-      description: form.description,
-      is_pinned: form.is_pinned,
+      ...form.data(),
       series_id: form.series_id.id,
     },
     {

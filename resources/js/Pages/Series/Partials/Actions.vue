@@ -1,12 +1,15 @@
 <script setup>
 import Dropdown from "@/Components/Dropdown/Dropdown.vue";
 import { MenuItem } from "@headlessui/vue";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/20/solid";
+import {
+  PencilSquareIcon,
+  StarIcon as StarIconSolid,
+  TrashIcon,
+} from "@heroicons/vue/20/solid";
 import {
   EllipsisHorizontalCircleIcon,
   StarIcon,
 } from "@heroicons/vue/24/outline";
-import { StarIcon as StarIconSolid } from "@heroicons/vue/20/solid";
 
 const props = defineProps({
   contentClass: { type: String, default: "" },

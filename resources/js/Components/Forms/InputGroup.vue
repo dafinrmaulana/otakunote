@@ -3,7 +3,6 @@ import InputText from "./InputText.vue";
 const props = defineProps({
   placeholder: { type: String, default: "" },
   label: { type: String, default: "" },
-  inputId: { type: String, default: "" },
   error: { type: String, default: "" },
   autofocus: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },

@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
+use App\Models\Series;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -44,6 +47,14 @@ class HandleInertiaRequests extends Middleware
         'info' => fn() => $request->session()->get('info'),
         'failed' => fn() => $request->session()->get('failed'),
         'warning' => fn() => $request->session()->get('warning'),
+      ],
+      'links' => [
+        'pinned_series' => Auth::check() ? Series::where('user_id', Auth::user()->id)
+          ->where('is_pinned', 1)->select('title', 'slug')
+          ->get() : [],
+        'pinned_categories' => Auth::check() ? Category::where('user_id', Auth::user()->id)
+          ->where('is_pinned', 1)->select('name', 'slug', 'color')
+          ->get() : [],
       ]
     ];
   }

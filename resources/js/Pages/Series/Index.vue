@@ -1,6 +1,11 @@
 <script setup>
+import BadgeStatus from "@/Components/BadgeStatus.vue";
 import Button from "@/Components/Buttons/Button.vue";
+import Paginations from "@/Components/Paginations.vue";
+import { getImage } from "@/Composables/getImage";
+import { useOpenModal } from "@/Composables/openModal";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { useLayout, useSidebar } from "@/Stores";
 import {
   PencilSquareIcon,
   PlusIcon,
@@ -12,17 +17,11 @@ import {
   StarIcon,
   TrashIcon,
 } from "@heroicons/vue/24/outline";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import { watchEffect } from "vue";
-import ModalCreate from "./Partials/ModalCreate.vue";
+import { Head, Link, router, useForm } from "@inertiajs/vue3";
 import Actions from "./Partials/Actions.vue";
-import ModalEdit from "./Partials/ModalEdit.vue";
+import ModalCreate from "./Partials/ModalCreate.vue";
 import ModalDelete from "./Partials/ModalDelete.vue";
-import { useLayout } from "@/Stores";
-import BadgeStatus from "@/Components/BadgeStatus.vue";
-import { useSidebar } from "@/Stores";
-import { getImage } from "@/Composables/getImage";
-import { useOpenModal } from "@/Composables/openModal";
+import ModalEdit from "./Partials/ModalEdit.vue";
 
 const { isOpen } = useSidebar();
 const { isGrid, toggleGrid } = useLayout("seriesLayout");
@@ -55,8 +54,10 @@ const form = useForm({
 const updatePin = (series) => {
   seriesData.value = series;
 
-  form
-    .transform((data) => ({
+  router.post(
+    route("series.update", seriesData.value.id),
+    {
+      _method: "put",
       title: seriesData.value.title,
       rating: String(seriesData.value.rating),
       slug: seriesData.value.slug,
@@ -68,12 +69,13 @@ const updatePin = (series) => {
       studio: seriesData.value.studio ?? "",
       source_url: seriesData.value.source_url ?? "",
       is_pinned: !seriesData.value.is_pinned,
-    }))
-    .put(route("series.update", seriesData.value.id), {
+    },
+    {
       onSuccess: () => {
         isModalEditOpen.value = false;
       },
-    });
+    }
+  );
 };
 
 const closeModal = (modal) => {
@@ -224,12 +226,12 @@ const closeModal = (modal) => {
                   :is-pinned="series.is_pinned"
                 />
               </div>
-              <div class="relative w-full h-56 overflow-hidden rounded-md">
+              <div class="relative w-full h-56 overflow-hidden rounded-lg">
                 <Link :href="route('series.show', series.slug)">
                   <img
                     :src="getImage(series.thumbnail)"
                     :alt="series.title"
-                    class="object-cover border size-full duration-300 hover:scale-105"
+                    class="object-cover border size-full duration-300 hover:scale-105 rounded-lg"
                   />
                 </Link>
                 <BadgeStatus
@@ -260,6 +262,7 @@ const closeModal = (modal) => {
         </TransitionGroup>
       </div>
     </section>
+    <Paginations :pagination="props.series" />
     <ModalCreate
       :is-open="isModalCreateOpen"
       @close="closeModal('create')"

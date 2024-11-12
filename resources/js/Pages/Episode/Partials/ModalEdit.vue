@@ -6,7 +6,7 @@ import InputSelect from "@/Components/Forms/InputSelect.vue";
 import { DialogPanel, DialogTitle } from "@headlessui/vue";
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/vue/20/solid";
 import { useForm } from "@inertiajs/vue3";
-import { watch, watchEffect } from "vue";
+import { watchEffect } from "vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
@@ -35,7 +35,6 @@ const save = () => {
         emits("close");
         form.reset();
       },
-      onError: (error) => console.log(error),
     });
 };
 

@@ -17,8 +17,20 @@ class CategoryController extends Controller
     $categories = Category::orderBy('is_pinned', 'desc')
       ->where('user_id', Auth::user()->id)
       ->orderBy('name', 'asc')
-      ->paginate(16);
+      ->with('series', function ($query) {
+        $query->select('id', 'title', 'slug', 'category_id');
+      })
+      ->paginate(36);
     return inertia('Category/Index', compact('categories'));
+  }
+
+  public function show(Category $category): Response
+  {
+    if ($category->user_id !== Auth::id()) {
+      abort(403);
+    }
+    $category->load('series', 'series.status', 'series.latestEpisode');
+    return inertia('Category/Show', compact('category'));
   }
 
   public function store(CategoryStoreRequest $request): RedirectResponse

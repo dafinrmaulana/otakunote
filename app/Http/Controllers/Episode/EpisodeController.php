@@ -38,9 +38,9 @@ class EpisodeController extends Controller
           ->groupBy('e2.series_id');
       })
       ->latest()
-      ->paginate(20);
+      ->paginate(36);
 
-    $series = Series::select(['id', 'title'])->with('latestEpisode')->get();
+    $series = Series::where('user_id', Auth::user()->id)->select(['id', 'title'])->with('latestEpisode')->get();
 
     return inertia('Dashboard', compact('episodes', 'series'));
   }

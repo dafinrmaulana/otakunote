@@ -1,12 +1,5 @@
 <script setup>
-import { ref } from "vue";
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/vue";
+import { Dialog, TransitionChild, TransitionRoot } from "@headlessui/vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },

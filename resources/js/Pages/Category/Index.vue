@@ -1,6 +1,9 @@
 <script setup>
 import Button from "@/Components/Buttons/Button.vue";
+import Paginations from "@/Components/Paginations.vue";
+import { useOpenModal } from "@/Composables/openModal";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { useLayout } from "@/Stores";
 import {
   BriefcaseIcon,
   PencilSquareIcon,
@@ -13,14 +16,12 @@ import {
   StarIcon,
   TrashIcon,
 } from "@heroicons/vue/24/outline";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useDateFormat } from "@vueuse/core";
-import ModalCreate from "./Partials/ModalCreate.vue";
 import Actions from "./Partials/Actions.vue";
-import ModalEdit from "./Partials/ModalEdit.vue";
+import ModalCreate from "./Partials/ModalCreate.vue";
 import ModalDelete from "./Partials/ModalDelete.vue";
-import { useLayout } from "@/Stores";
-import { useOpenModal } from "@/Composables/openModal";
+import ModalEdit from "./Partials/ModalEdit.vue";
 
 const { isGrid, toggleGrid } = useLayout("categoryLayout");
 const props = defineProps({
@@ -120,12 +121,17 @@ const updatePin = (category) => {
                 />
               </td>
               <td>
-                {{ category.name }}
+                <Link
+                  :href="route('category.show', category.slug)"
+                  :class="category.series.length > 0 ? 'underline' : ''"
+                >
+                  {{ category.name }}
+                </Link>
               </td>
               <td
                 class="text-sm hidden min-[470px]:table-cell text-gray-700 font-medium"
               >
-                20
+                {{ category.series.length }}
               </td>
               <td
                 class="text-sm hidden min-[400px]:table-cell text-gray-700 font-medium"
@@ -189,12 +195,26 @@ const updatePin = (category) => {
                 category.is_pinned == true ? 'text-amber-400' : 'text-gray-400'
               "
             />
-            <BriefcaseIcon class="size-9 text-gray-500 mt-4" />
+
+            <Link :href="route('category.show', category.slug)">
+              <BriefcaseIcon class="size-9 text-gray-500 mt-4" />
+            </Link>
+
             <div class="flex justify-between items-center w-full">
-              <div class="flex flex-col text-start">
-                <h3 class="text-sm font-semibold">{{ category.name }}</h3>
-                <small class="text-xs opacity-50">20 Series</small>
-              </div>
+              <Link
+                :href="route('category.show', category.slug)"
+                class="flex flex-col text-start"
+              >
+                <h3
+                  class="text-sm font-semibold"
+                  :class="category.series.length > 0 ? 'underline' : ''"
+                >
+                  {{ category.name }}
+                </h3>
+                <small class="text-xs opacity-50">
+                  {{ category.series.length }} Series
+                </small>
+              </Link>
               <Actions
                 trigger-class="translate-y-1"
                 @click:edit="openModal(category, 'edit')"
@@ -207,6 +227,8 @@ const updatePin = (category) => {
         </TransitionGroup>
       </div>
     </section>
+
+    <Paginations :pagination="props.categories" />
     <ModalCreate
       :is-open="isModalCreateOpen"
       @close="isModalCreateOpen = false"

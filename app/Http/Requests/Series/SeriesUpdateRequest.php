@@ -42,7 +42,7 @@ class SeriesUpdateRequest extends FormRequest
           ->where('user_id', Auth::user()->id)
           ->ignore($this->series->id, 'id')
       ],
-      'thumbnail' => ['nullable'],
+      'thumbnail' => ['nullable', 'max:2048'],
       'rating' => ['required', 'numeric', 'between:0,10'],
       'author' => ['nullable', 'string', 'max:255', 'min:3'],
       'source_url' => ['nullable', 'url'],
@@ -65,45 +65,29 @@ class SeriesUpdateRequest extends FormRequest
 
   public function data(): array
   {
-    if ($this->thumbnail && $this->hasFile('thumbnail')) {
+    if ($this->hasFile('thumbnail')) {
       $this->series->thumbnail && Storage::delete($this->series->thumbnail);
-      return [
-        ...$this->only(
-          [
-            'title',
-            'slug',
-            'rating',
-            'author',
-            'studio',
-            'is_pinned',
-            'source_url',
-            'media'
-          ]
-        ),
-        'category_id' => $this->category_id,
-        'status_id' => $this->status_id,
-        'thumbnail' => $this->file('thumbnail')->store('images/series/thumbnail', 'local'),
-        'user_id' => Auth::user()->id
-      ];
+
+      $thumbnailPath = $this->file('thumbnail')->store('images/series/thumbnail', 'local');
     } else {
-      return [
-        ...$this->only(
-          [
-            'title',
-            'slug',
-            'rating',
-            'author',
-            'studio',
-            'is_pinned',
-            'source_url',
-            'media',
-            'thumbnail'
-          ]
-        ),
-        'category_id' => $this->category_id,
-        'status_id' => $this->status_id,
-        'user_id' => Auth::user()->id
-      ];
+      $thumbnailPath = $this->thumbnail;
     }
+
+    return [
+      ...$this->only([
+        'title',
+        'slug',
+        'rating',
+        'author',
+        'studio',
+        'is_pinned',
+        'source_url',
+        'media',
+        'category_id',
+        'status_id'
+      ]),
+      'thumbnail' => $thumbnailPath,
+      'user_id' => Auth::user()->id
+    ];
   }
 }

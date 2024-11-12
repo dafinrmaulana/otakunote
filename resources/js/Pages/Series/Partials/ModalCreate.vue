@@ -4,13 +4,8 @@ import DialogModal from "@/Components/Dialog/DialogModal.vue";
 import InputFile from "@/Components/Forms/InputFile.vue";
 import InputGroup from "@/Components/Forms/InputGroup.vue";
 import InputSelect from "@/Components/Forms/InputSelect.vue";
-import {
-  DialogPanel,
-  DialogTitle,
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-} from "@headlessui/vue";
+import InputText from "@/Components/Forms/InputText.vue";
+import { DialogPanel, DialogTitle } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/16/solid";
 import { TrashIcon, XMarkIcon } from "@heroicons/vue/20/solid";
 import { useForm } from "@inertiajs/vue3";
@@ -18,7 +13,6 @@ import axios from "axios";
 import { computed, ref, watch } from "vue";
 import RecomendationBtn from "./RecomendationBtn.vue";
 import SearchLoading from "./SearchLoading.vue";
-import InputText from "@/Components/Forms/InputText.vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
@@ -226,8 +220,8 @@ const handleFillForm = (data) => {
               <h1
                 v-if="
                   !isRecomendationLoading &&
-                  !mangaRecomendations.length &&
-                  !animeRecomendations.length
+                  mangaRecomendations.length === 0 &&
+                  animeRecomendations.length === 0
                 "
                 class="text-center text-sm font-medium opacity-50"
               >

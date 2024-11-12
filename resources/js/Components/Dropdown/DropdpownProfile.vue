@@ -4,7 +4,8 @@ import {
   ArrowRightStartOnRectangleIcon,
   UserIcon,
 } from "@heroicons/vue/20/solid";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
+import { getImage } from "@/Composables/getImage";
 </script>
 
 <template>
@@ -12,8 +13,8 @@ import { Link } from "@inertiajs/vue3";
     <Menu>
       <MenuButton>
         <img
-          class="h-10 w-10 rounded-full"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          class="h-10 w-10 rounded-full object-cover outline outline-1 outline-slate-200"
+          :src="getImage($page.props.auth.user.profile_image)"
           :alt="$page.props.auth.user.name"
         />
       </MenuButton>
@@ -27,7 +28,7 @@ import { Link } from "@inertiajs/vue3";
               :href="route('profile.edit')"
             >
               <UserIcon class="size-4" />
-              Profile
+              {{ $page.props.auth.user.name }}
             </Link>
           </MenuItem>
           <MenuItem>

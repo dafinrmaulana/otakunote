@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch, watchEffect } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 
 const props = defineProps({
   color: { type: String, default: "#000000" },
@@ -10,9 +10,9 @@ const textColorClass = ref("");
 
 // Fungsi untuk menghitung kecerahan dan mengatur warna teks
 const adjustTextColor = () => {
-  const bgColor = props.color;
+  const bgColor = props.color || "#000000";
   let r, g, b;
-  if (bgColor.startsWith("#")) {
+  if (bgColor?.startsWith("#")) {
     // Konversi warna heksadesimal ke RGB
     const hex = bgColor.replace("#", "");
     r = parseInt(hex.substring(0, 2), 16);
@@ -35,7 +35,7 @@ watchEffect(() => props.color, adjustTextColor);
 <template>
   <div
     :style="{ backgroundColor: props.color }"
-    class="sm:w-20 h-6 text-center rounded-md overflow-hidden text-ellipsis grid place-items-center"
+    class="min-w-10 !px-3 h-6 text-center rounded-md overflow-hidden text-ellipsis grid place-items-center"
   >
     <p
       :class="textColorClass"

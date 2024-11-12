@@ -69,12 +69,9 @@ watch(
   }
 );
 
-console.log();
-
 const handleFileSelected = (e) => {
   fileName.value = e.name;
   form.thumbnail = e;
-  console.log(form.thumbnail);
 };
 
 watch(
@@ -95,22 +92,19 @@ const save = () => {
     route("series.update", props.data.id),
     {
       _method: "put",
-      thumbnail: form.thumbnail,
-      title: form.title,
-      rating: form.rating,
-      slug: form.slug,
+      ...form.data(),
       category_id: form.category_id.id,
       status_id: form.status_id.id,
       media: form.media.id,
-      author: form.author,
-      studio: form.studio,
-      source_url: form.source_url,
     },
     {
       onStart: () => (disabled.value = true),
-      onSuccess: () => emits("close"),
       onFinish: () => (disabled.value = false),
       onError: (errors) => (form.errors = errors),
+      onSuccess: () => {
+        emits("close");
+        form.reset();
+      },
       preserveScroll: true,
     }
   );
@@ -125,7 +119,9 @@ const removeThumbnail = () => {
     {
       onStart: () => (disabled.value = true),
       onFinish: () => (disabled.value = false),
-      onError: (errors) => console.log(errors),
+      onError: (errors) => {
+        throw new Error(errors);
+      },
       onSuccess: () => {
         emits("close");
         form.reset();

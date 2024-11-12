@@ -57,6 +57,9 @@
   .sidebar-link {
     @apply rounded-md text-gray-500 hover:text-violet-600 flex flex-col sm:flex-row sm:hover:bg-violet-200 sm:justify-start sm:px-3 sm:py-1 sm:rounded sm:gap-2 text-xs sm:text-sm sm:[&>p]:translate-y-[1px] sm:font-medium items-center justify-center duration-200;
   }
+  .sidebar-link-no-res {
+    @apply rounded text-sm text-gray-500 hover:text-violet-600 flex flex-row hover:bg-violet-200 justify-start px-3 py-2 gap-2 [&>p]:translate-y-[1px] font-medium items-center duration-200;
+  }
   .link-active {
     @apply sm:!bg-violet-200 !text-violet-600;
   }

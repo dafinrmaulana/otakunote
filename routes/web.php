@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Episode\EpisodeController;
-use App\Http\Controllers\Genre\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Series\SeriesController;
 use App\Http\Controllers\Status\StatusController;
@@ -23,12 +22,13 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
   // status
   Route::get('/status', [StatusController::class, 'index'])->name('status.index');
   Route::post('/status', [StatusController::class, 'store'])->name('status.store');
+  Route::get('/status/{status:slug}', [StatusController::class, 'show'])->name('status.show');
   Route::put('/status/{status}', [StatusController::class, 'update'])->name('status.update');
   Route::delete('/status/{status}', [StatusController::class, 'destroy'])->name('status.destroy');
 
@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
   Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
   Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
+  Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
   Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
   // series

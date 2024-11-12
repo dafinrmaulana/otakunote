@@ -17,7 +17,7 @@ class GenreController extends Controller
     $genres = Genre::orderBy('is_pinned', 'desc')
       ->orderBy('name', 'asc')
       ->where('user_id', Auth::user()->id)
-      ->paginate(16);
+      ->paginate(36);
     return inertia('Genre/Index', compact('genres'));
   }
 

@@ -33,7 +33,13 @@ class EpisodeStoreRequest extends FormRequest
           ->where('user_id', Auth::user()->id)
       ],
       "source_url" => ['nullable'],
-      "description" => ['nullable']
+      "description" => ['nullable'],
+      "series_id" => [
+        'required',
+        Rule::exists('series', 'id')->where(function ($query) {
+          $query->where('user_id', Auth::id());
+        })
+      ],
     ];
   }
 

@@ -3,11 +3,10 @@ import Button from "@/Components/Buttons/Button.vue";
 import DialogModal from "@/Components/Dialog/DialogModal.vue";
 import InputGroup from "@/Components/Forms/InputGroup.vue";
 import InputSelect from "@/Components/Forms/InputSelect.vue";
-import InputText from "@/Components/Forms/InputText.vue";
 import { DialogPanel, DialogTitle } from "@headlessui/vue";
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/vue/20/solid";
 import { router, useForm } from "@inertiajs/vue3";
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, ref, watchEffect } from "vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
@@ -30,10 +29,7 @@ const save = () => {
   router.post(
     route("episode.store"),
     {
-      number: form.number,
-      source_url: form.source_url,
-      description: form.description,
-      is_pinned: form.is_pinned,
+      ...form.data(),
       series_id: form.series_id.id,
     },
     {

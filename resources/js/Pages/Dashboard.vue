@@ -1,27 +1,36 @@
 <script setup>
-import Button from "@/Components/Buttons/Button.vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { PencilSquareIcon, PlusIcon, TrashIcon } from "@heroicons/vue/20/solid";
-import { StarIcon } from "@heroicons/vue/24/outline";
-import { QueueListIcon, Squares2X2Icon } from "@heroicons/vue/24/outline";
-import { Head, Link } from "@inertiajs/vue3";
-import ModalCreate from "./Episode/Partials/ModalCreate.vue";
-import ModalEdit from "./Episode/Partials/ModalEdit.vue";
-import ModalDelete from "./Episode/Partials/ModalDelete.vue";
-import { useLayout } from "@/Stores";
 import BadgeStatus from "@/Components/BadgeStatus.vue";
-import Actions from "./Episode/Partials/Actions.vue";
+import Button from "@/Components/Buttons/Button.vue";
+import Paginations from "@/Components/Paginations.vue";
 import { getImage } from "@/Composables/getImage";
 import { useOpenModal } from "@/Composables/openModal";
-import { useSidebar } from "@/Stores";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { useLayout, useSidebar } from "@/Stores";
+import {
+  ArrowPathIcon,
+  PencilSquareIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/vue/20/solid";
+import {
+  QueueListIcon,
+  Squares2X2Icon,
+  StarIcon,
+} from "@heroicons/vue/24/outline";
+import { Head, Link, router, usePage } from "@inertiajs/vue3";
+import Actions from "./Episode/Partials/Actions.vue";
+import ModalCreate from "./Episode/Partials/ModalCreate.vue";
+import ModalDelete from "./Episode/Partials/ModalDelete.vue";
+import ModalEdit from "./Episode/Partials/ModalEdit.vue";
 
-const { isGrid, toggleGrid } = useLayout("dashboardLayout");
-const { isOpen } = useSidebar();
+const page = usePage();
 const props = defineProps({
   episodes: { type: Object },
   series: { type: Object },
 });
 
+const { isGrid, toggleGrid } = useLayout("dashboardLayout");
+const { isOpen } = useSidebar();
 const {
   isModalCreateOpen,
   isModalEditOpen,
@@ -41,6 +50,14 @@ const {
       <h1 class="font-bold text-2xl">Dashboard</h1>
 
       <div class="flex gap-2 items-center">
+        <Button
+          @click="router.reload({ only: ['episodes'] })"
+          variant="outline-base"
+          class="size-8 !p-0 text-slate-500 hover:text-black"
+          title="Reload data"
+        >
+          <ArrowPathIcon class="size-5" />
+        </Button>
         <Button
           @click="toggleGrid"
           variant="outline-base"
@@ -143,7 +160,7 @@ const {
         :class="
           isOpen
             ? 'lg:grid-cols-5 xl:grid-cols-6'
-            : 'lg:grid-cols-7 xl:grid-cols-8'
+            : 'lg:grid-cols-6 xl:grid-cols-7'
         "
       >
         <TransitionGroup name="list">
@@ -156,14 +173,12 @@ const {
                   @click:delete="openModal(episode, 'delete')"
                 />
               </div>
-              <div
-                class="relative size-full max-h-48 overflow-hidden rounded-md"
-              >
+              <div class="relative size-full h-56 overflow-hidden rounded-lg">
                 <Link :href="route('series.show', episode.series.slug)">
                   <img
                     :src="getImage(episode.series.thumbnail)"
                     :alt="episode.series.title"
-                    class="object-cover border size-full duration-300 hover:scale-105"
+                    class="object-cover border size-full duration-300 hover:scale-105 rounded-lg"
                   />
                 </Link>
                 <BadgeStatus
@@ -203,6 +218,7 @@ const {
       </div>
     </section>
 
+    <Paginations :pagination="props.episodes" />
     <ModalCreate
       :is-open="isModalCreateOpen"
       @close="isModalCreateOpen = false"

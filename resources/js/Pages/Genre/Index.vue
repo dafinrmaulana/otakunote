@@ -1,6 +1,8 @@
 <script setup>
 import Button from "@/Components/Buttons/Button.vue";
+import { useOpenModal } from "@/Composables/openModal";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { useLayout } from "@/Stores";
 import {
   BriefcaseIcon,
   PencilSquareIcon,
@@ -15,13 +17,10 @@ import {
 } from "@heroicons/vue/24/outline";
 import { Head, useForm } from "@inertiajs/vue3";
 import { useDateFormat } from "@vueuse/core";
-import { ref } from "vue";
-import ModalCreate from "./Partials/ModalCreate.vue";
 import Actions from "./Partials/Actions.vue";
-import ModalEdit from "./Partials/ModalEdit.vue";
+import ModalCreate from "./Partials/ModalCreate.vue";
 import ModalDelete from "./Partials/ModalDelete.vue";
-import { useLayout } from "@/Stores";
-import { useOpenModal } from "@/Composables/openModal";
+import ModalEdit from "./Partials/ModalEdit.vue";
 
 const { isGrid, toggleGrid } = useLayout("genreLayout");
 const props = defineProps({

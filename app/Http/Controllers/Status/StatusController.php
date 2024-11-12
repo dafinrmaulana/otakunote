@@ -16,9 +16,22 @@ class StatusController extends Controller
   {
     $statuses = Status::orderBy('is_pinned', 'desc')
       ->where('user_id', Auth::user()->id)
+      ->with('series', function ($query) {
+        $query->select('id', 'title', 'slug', 'status_id');
+      })
       ->orderBy('name', 'asc')
-      ->paginate(16);
+      ->paginate(36);
     return inertia('Status/Index', compact('statuses'));
+  }
+
+
+  public function show(Status $status): Response
+  {
+    if ($status->user_id !== Auth::id()) {
+      abort(403);
+    }
+    $status->load('series', 'series.status', 'series.latestEpisode');
+    return inertia('Status/Show', compact('status'));
   }
 
   public function store(StatusStoreRequest $request): RedirectResponse

@@ -34,7 +34,7 @@ class SeriesController extends Controller
           $query->select('id', 'number', 'series_id');
         }
       ])
-      ->paginate(20);
+      ->paginate(36);
 
     return inertia('Series/Index', [
       'categories' => $categories,
@@ -55,6 +55,9 @@ class SeriesController extends Controller
 
   public function show(Series $series)
   {
+    if ($series->user_id !== Auth::id()) {
+      abort(403);
+    }
     $series->load([
       'status' => function ($query) {
         $query->select('id', 'name', 'color');

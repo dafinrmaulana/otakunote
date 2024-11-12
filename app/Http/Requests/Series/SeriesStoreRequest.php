@@ -63,13 +63,10 @@ class SeriesStoreRequest extends FormRequest
 
   public function data(): array
   {
-    $uploadedThumbnail = null;
-    if ($this->thumbnail !== null && $this->hasFile('thumbnail')) {
-      $uploadedThumbnail = $this->file('thumbnail')->store('images/series/thumbnail', 'local');
-    } else if ($this->thumbnail !== null && !$this->hasFile('thumbnail')) {
-      $uploadedThumbnail = $this->thumbnail;
+    if ($this->hasFile('thumbnail')) {
+      $thumbnailPath = $this->file('thumbnail')->store('images/series/thumbnail', 'local');
     } else {
-      $uploadedThumbnail = null;
+      $thumbnailPath = $this->thumbnail;
     }
     return [
       ...$this->only(
@@ -80,12 +77,12 @@ class SeriesStoreRequest extends FormRequest
           'author',
           'studio',
           'source_url',
-          'media'
+          'media',
+          'status_id',
+          'category_id'
         ]
       ),
-      'category_id' => $this->category_id,
-      'status_id' => $this->status_id,
-      'thumbnail' => $uploadedThumbnail,
+      'thumbnail' => $thumbnailPath,
       'user_id' => Auth::user()->id
     ];
   }
