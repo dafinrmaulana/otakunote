@@ -33,7 +33,7 @@ watchEffect(() => console.log(form.errors));
 </script>
 
 <template>
-  <GuestLayout class="sm:*:mt-10 *:relative *:!overflow-y-auto *:!gap-5">
+  <GuestLayout class="*:relative *:!overflow-y-auto *:!gap-5">
     <Head title="Register" />
 
     <button
@@ -101,6 +101,7 @@ watchEffect(() => console.log(form.errors));
             v-model="form.name"
             placeholder="Your full name"
             :error="form.errors.name"
+            autofocus
           />
           <InputError class="mt-2" :message="form.errors.name" />
         </div>
