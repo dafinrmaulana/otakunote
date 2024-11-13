@@ -14,19 +14,19 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
     User::create([
-      'name' => 'Dafi',
-      'email' => 'admin@otaku.com',
+      'name' => 'Admin',
+      'email' => 'admin@otaku.note',
       'password' => bcrypt('admin')
     ]);
     User::create([
       'name' => 'User',
-      'email' => 'user@otaku.com',
+      'email' => 'user@otaku.note',
       'password' => bcrypt('user')
     ]);
 
-    $this->call([
-      StatusSeeder::class,
-      CategorySeeder::class
-    ]);
+    // $this->call([
+    //   StatusSeeder::class,
+    //   CategorySeeder::class
+    // ]);
   }
 }
