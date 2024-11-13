@@ -40,7 +40,7 @@ const emits = defineEmits(["click:edit", "click:delete", "click:pin"]);
             :class="props.isPinned === 1 ? 'text-amber-400' : ''"
           />
           <span class="translate-y-[1px] text-start text-xs">
-            {{ props.isPinned === 0 ? "Pin Category" : "Remove Pin" }}
+            {{ props.isPinned === 0 ? "Pin Type" : "Remove Pin" }}
           </span>
         </button>
       </MenuItem>
