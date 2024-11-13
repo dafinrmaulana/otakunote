@@ -16,7 +16,7 @@ const emits = defineEmits(["click:add-btn"]);
 
 <template>
   <ToastNotification />
-  <div class="min-h-screen bg-slate-100 flex">
+  <div class="min-h-dvh bg-slate-100 flex">
     <Sidebar />
 
     <!-- backdrop sidebar -->

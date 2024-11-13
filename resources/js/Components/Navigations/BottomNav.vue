@@ -59,7 +59,7 @@ const emits = defineEmits(["click:add-btn"]);
         :is="$page.url === '/category' ? GlobeAltIconSolid : GlobeAltIcon"
         class="size-6 flex-none"
       />
-      <p>Caategory</p>
+      <p>Type</p>
     </Link>
     <Link
       :href="route('status.index')"

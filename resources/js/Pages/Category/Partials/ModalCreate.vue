@@ -57,7 +57,7 @@ const defaultColors = ["#7c3aed", "#dc2626", "#fbbf24", "#10b981", "#0ea5e9"];
     >
       <div class="flex justify-between w-full items-center">
         <DialogTitle as="h3" class="text-lg font-bold leading-6 text-gray-900">
-          Add Category
+          Add Type
         </DialogTitle>
 
         <Button class="!size-9 !p-0" @click="emits('close')">

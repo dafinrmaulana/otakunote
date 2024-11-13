@@ -26,6 +26,8 @@ const { isGrid: isSeriesOpen, toggleGrid: toggleSeries } =
   useLayout("linkSeries");
 const { isGrid: isCategoriesOpen, toggleGrid: toggleCategoriesOpen } =
   useLayout("linkCategories");
+const { isGrid: isStatusesOpen, toggleGrid: toggleStatusesOpen } =
+  useLayout("linkCategories");
 const featureLinks = [
   {
     title: "Home",
@@ -49,7 +51,7 @@ const featureLinks = [
     url: "/status",
   },
   {
-    title: "Category",
+    title: "Type",
     icon: GlobeAltIcon,
     activeIcon: GlobeAltIconSolid,
     href: route("category.index"),
@@ -58,6 +60,7 @@ const featureLinks = [
 ];
 const series = computed(() => page.props.links.pinned_series);
 const categories = computed(() => page.props.links.pinned_categories);
+const statuses = computed(() => page.props.links.pinned_statuses);
 
 if (window.innerWidth < 1024) {
   router.on("finish", () => {
@@ -68,13 +71,13 @@ if (window.innerWidth < 1024) {
 
 <template>
   <aside
-    class="flex flex-col gap-2 w-64 fixed bg-white lg:bg-slate-100 inset-y-0 h-full lg:static overflow-x-hidden py-3 border-none duration-300 z-50"
+    class="flex flex-col gap-2 w-64 fixed bg-white lg:bg-slate-100 inset-y-0 max-h-dvh lg:static overflow-x-hidden overflow-y-auto py-3 border-none duration-300 z-50"
     :class="{
       'left-0 lg:max-w-64 px-3 shadow lg:shadow-none': isOpen,
       '-left-64 lg:max-w-0 px-0': !isOpen,
     }"
   >
-    <div class="flex items-center justify-between lg:justify-center mb-5">
+    <div class="flex items-center justify-between lg:justify-center sm:mb-5">
       <div
         class="flex items-center lg:justify-center font-bold text-xl text-violet-600 gap-2"
       >
@@ -131,6 +134,41 @@ if (window.innerWidth < 1024) {
                 >
                   <div class="size-4 bg-violet-600 rounded-full flex-none" />
                   <p class="line-clamp-1 flex-1">{{ link.title }}</p>
+                </Link>
+              </DisclosurePanel>
+            </div>
+          </transition>
+        </Disclosure>
+      </template>
+      <template v-if="statuses.length > 0">
+        <Disclosure>
+          <DisclosureButton
+            @click="toggleStatusesOpen"
+            class="flex items-center mt-3 text-slate-400"
+          >
+            <small>Statuses</small>
+            <ChevronDownIcon
+              class="size-4 duration-150"
+              :class="!isStatusesOpen ? '-rotate-90' : ''"
+            />
+          </DisclosureButton>
+          <transition name="list">
+            <div v-show="isStatusesOpen">
+              <DisclosurePanel static>
+                <Link
+                  v-for="link in statuses"
+                  :key="link.name"
+                  :href="route('category.show', link.slug)"
+                  class="sidebar-link-no-res mt-1"
+                  :class="
+                    $page.url === `/status/${link.slug}` ? 'link-active' : ''
+                  "
+                >
+                  <div
+                    class="size-4 rounded-full flex-none"
+                    :style="{ backgroundColor: link.color }"
+                  />
+                  <p class="line-clamp-1 flex-1">{{ link.name }}</p>
                 </Link>
               </DisclosurePanel>
             </div>

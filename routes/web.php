@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Series\SeriesController;
 use App\Http\Controllers\Status\StatusController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,9 @@ Route::middleware('auth')->group(function () {
 
     return $response->json();
   });
+
+  // search
+  Route::get('/search', [SearchController::class, 'index'])->name('search');
 });
 
 require __DIR__ . '/auth.php';

@@ -31,7 +31,7 @@ const deleteCategory = () => {
     >
       <div class="flex justify-between w-full items-center">
         <DialogTitle as="h3" class="text-lg font-bold leading-6 text-gray-900">
-          Delete Category "{{ props.data.name }}"
+          Delete Type "{{ props.data.name }}"
         </DialogTitle>
 
         <Button class="!size-9 !p-0" @click="emits('close')">
@@ -40,7 +40,7 @@ const deleteCategory = () => {
       </div>
 
       <DialogDescription>
-        <p>Are you sure want to delete this Category?</p>
+        <p>Are you sure want to delete this Type?</p>
       </DialogDescription>
 
       <div class="mt-5 flex w-full gap-2 min-[400px]:justify-end">

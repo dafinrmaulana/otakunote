@@ -21,7 +21,7 @@ const attrs = computed(() => {
 </script>
 
 <template>
-  <label :for="props.for" class="flex gap-1 input items-center px-3">
+  <label :for="props.for" class="flex input items-center px-3">
     <component :is="props.icon" class="size-5 text-slate-400" />
     <InputText
       :id="props.for"
@@ -29,6 +29,7 @@ const attrs = computed(() => {
       :placeholder="props.placeholder"
       v-model="model"
       v-bind="attrs"
+      class="focus-within:ring-0 focus-within:border-none border-none !px-2"
       :disabled="props.disabled"
     />
   </label>

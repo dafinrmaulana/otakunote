@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Category;
 use App\Models\Series;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
@@ -53,6 +54,9 @@ class HandleInertiaRequests extends Middleware
           ->where('is_pinned', 1)->select('title', 'slug')
           ->get() : [],
         'pinned_categories' => Auth::check() ? Category::where('user_id', Auth::user()->id)
+          ->where('is_pinned', 1)->select('name', 'slug', 'color')
+          ->get() : [],
+        'pinned_statuses' => Auth::check() ? Status::where('user_id', Auth::user()->id)
           ->where('is_pinned', 1)->select('name', 'slug', 'color')
           ->get() : [],
       ]

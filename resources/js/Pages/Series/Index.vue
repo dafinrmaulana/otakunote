@@ -130,7 +130,7 @@ const closeModal = (modal) => {
           <div>#</div>
           <div>Title</div>
           <div class="!hidden sm:!flex">Status</div>
-          <div class="!hidden md:!flex">Category</div>
+          <div class="!hidden md:!flex">Type</div>
           <div class="!hidden min-[500px]:!flex">Last Episode</div>
           <div class="justify-center">Actions</div>
         </div>

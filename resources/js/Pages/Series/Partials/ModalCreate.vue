@@ -12,7 +12,7 @@ import { useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import { computed, ref, watch } from "vue";
 import RecomendationBtn from "./RecomendationBtn.vue";
-import SearchLoading from "./SearchLoading.vue";
+import SearchLoading from "@/Components/SearchLoading.vue";
 
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
@@ -285,7 +285,7 @@ const handleFillForm = (data) => {
 
         <div class="grid grid-cols-2 gap-2">
           <!-- category -->
-          <InputGroup label="Category" class="w-full">
+          <InputGroup label="Type" class="w-full">
             <InputSelect
               :options="props.categoryOptions"
               v-model="form.category_id"

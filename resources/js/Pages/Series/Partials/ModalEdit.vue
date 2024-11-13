@@ -232,7 +232,7 @@ const closeModal = () => {
 
         <!-- category and status -->
         <div class="grid grid-cols-2 gap-2">
-          <InputGroup label="Category" class="w-full">
+          <InputGroup label="Type" class="w-full">
             <InputSelect
               :options="props.categoryOptions"
               v-model="form.category_id"

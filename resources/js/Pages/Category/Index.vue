@@ -70,7 +70,7 @@ const updatePin = (category) => {
     @click:add-btn="isModalCreateOpen = true"
   >
     <section class="flex w-full justify-between items-center">
-      <h1 class="font-bold text-2xl">Category</h1>
+      <h1 class="font-bold text-2xl">Type</h1>
 
       <div class="flex gap-2 items-center">
         <Button

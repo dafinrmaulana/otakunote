@@ -4,7 +4,7 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/vue/16/solid";
 import { router } from "@inertiajs/vue3";
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import Button from "./Buttons/Button.vue";
 
 const props = defineProps({
