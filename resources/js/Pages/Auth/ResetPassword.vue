@@ -85,7 +85,7 @@ const submit = () => {
         <InputError class="mt-1" :message="form.errors.password" />
       </div>
       <div class="mt-4">
-        <InputLabel for="password" value="Password" />
+        <InputLabel for="password" value="Confirm Password" />
 
         <TextInput
           id="password_confirmation"

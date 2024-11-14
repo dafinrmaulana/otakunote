@@ -43,7 +43,7 @@ const submit = () => {
 
     <div
       v-if="status"
-      class="text-xs w-full font-medium bg-green-100 text-green-600 p-2 rounded-md text-start -my-5"
+      class="text-xs w-full font-medium bg-green-100 text-green-600 p-2 rounded-md text-start -my-5 sm:my-0"
     >
       {{ status }}
     </div>
