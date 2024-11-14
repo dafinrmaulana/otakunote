@@ -1,13 +1,11 @@
 <script setup>
-import Checkbox from "@/Components/Checkbox.vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import Button from "@/Components/Buttons/Button.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import Button from "@/Components/Buttons/Button.vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 defineProps({
   canResetPassword: {
@@ -42,7 +40,7 @@ const submit = () => {
     <div
       class="flex justify-start flex-col items-start sm:items-center text-start w-full gap-5 sm:gap-3"
     >
-      <ApplicationLogo class="size-10 text-violet-600" />
+      <ApplicationLogo class="size-10 text-indigo-500" />
       <div class="space-y-1 sm:text-center">
         <h1 class="font-semibold text-2xl">Welcome back!</h1>
         <p class="text-sm leading-4 text-gray-500">
@@ -89,9 +87,8 @@ const submit = () => {
 
       <div class="mt-2 block">
         <Link
-          v-if="canResetPassword"
           :href="route('password.request')"
-          class="rounded-md text-sm text-violet-600 hover:text-violet-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          class="rounded-md text-sm text-indigo-500 hover:text-violet-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           Forgot your password?
         </Link>

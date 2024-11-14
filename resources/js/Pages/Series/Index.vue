@@ -149,7 +149,7 @@ const closeModal = (modal) => {
             <div class="overflow-hidden" :title="series.title">
               <Link
                 :href="route('series.show', series.slug)"
-                class="block w-full hover:text-violet-600 duration-200"
+                class="block w-full hover:text-indigo-500 duration-200"
                 >{{ series.title }}</Link
               >
             </div>

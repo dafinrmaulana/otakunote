@@ -11,7 +11,7 @@ const isChecked = defineModel();
     <input type="checkbox" v-model="isChecked" class="sr-only peer" />
 
     <div
-      class="absolute size-full bg-violet-600 top-0 p-[2px] text-white opacity-0 peer-checked:opacity-100 duration-150"
+      class="absolute size-full bg-indigo-500 top-0 p-[2px] text-white opacity-0 peer-checked:opacity-100 duration-150"
     >
       <CheckIcon />
     </div>

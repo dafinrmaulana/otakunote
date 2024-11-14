@@ -55,16 +55,16 @@
 
 @layer components {
   .sidebar-link {
-    @apply rounded-md text-gray-500 hover:text-violet-600 flex flex-col sm:flex-row sm:hover:bg-violet-200 sm:justify-start sm:px-3 sm:py-1 sm:rounded sm:gap-2 text-xs sm:text-sm sm:[&>p]:translate-y-[1px] sm:font-medium items-center justify-center duration-200;
+    @apply rounded-md text-gray-500 hover:text-indigo-500 flex flex-col sm:flex-row sm:hover:bg-violet-200 sm:justify-start sm:px-3 sm:py-1 sm:rounded sm:gap-2 text-xs sm:text-sm sm:[&>p]:translate-y-[1px] sm:font-medium items-center justify-center duration-200;
   }
   .sidebar-link-no-res {
-    @apply rounded text-sm text-gray-500 hover:text-violet-600 flex flex-row hover:bg-violet-200 justify-start px-3 py-2 gap-2 [&>p]:translate-y-[1px] font-medium items-center duration-200;
+    @apply rounded text-sm text-gray-500 hover:text-indigo-500 flex flex-row hover:bg-violet-200 justify-start px-3 py-2 gap-2 [&>p]:translate-y-[1px] font-medium items-center duration-200;
   }
   .link-active {
-    @apply sm:!bg-violet-200 !text-violet-600;
+    @apply sm:!bg-violet-200 !text-indigo-500;
   }
   .input-error {
-    @apply focus-within:!border-violet-600 !border-red-500;
+    @apply focus-within:!border-indigo-500 !border-red-500;
   }
 }
 
@@ -96,6 +96,19 @@
 }
 .fade-enter-to,
 .fade-leave-from {
+  @apply opacity-100;
+}
+
+.fade-on-sm-enter-active,
+.fade-on-sm-leave-active {
+  @apply sm:duration-200;
+}
+.fade-on-sm-enter-from,
+.fade-on-sm-leave-to {
+  @apply opacity-0;
+}
+.fade-on-sm-enter-to,
+.fade-on-sm-leave-from {
   @apply opacity-100;
 }
 /* fade end */

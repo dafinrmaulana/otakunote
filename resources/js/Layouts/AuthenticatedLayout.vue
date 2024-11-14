@@ -20,7 +20,7 @@ const emits = defineEmits(["click:add-btn"]);
     <Sidebar />
 
     <!-- backdrop sidebar -->
-    <transition name="fade">
+    <transition name="fade-on-sm">
       <div
         v-if="isOpen"
         class="bg-black/40 backdrop-blur-sm lg:hidden fixed inset-0 size-full z-40"

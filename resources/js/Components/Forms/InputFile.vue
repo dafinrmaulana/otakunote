@@ -19,13 +19,13 @@ const props = defineProps({
 
     <label
       for="file-upload"
-      class="absolute size-full flex items-center gap-2 pr-1 peer-focus-within:ring-1 duration-100 peer-focus-within:border-violet-600 peer-focus-within:outline-none peer-focus-within:ring-violet-600 rounded-md"
+      class="absolute size-full flex items-center gap-2 pr-1 peer-focus-within:ring-1 duration-100 peer-focus-within:border-indigo-500 peer-focus-within:outline-none peer-focus-within:ring-indigo-500 rounded-md"
       :class="{
         'input-error': props.error,
       }"
     >
       <span
-        class="bg-violet-600 text-white px-3 h-full rounded-l-md flex items-center text-sm text-nowrap"
+        class="bg-indigo-500 text-white px-3 h-full rounded-l-md flex items-center text-sm text-nowrap"
       >
         Choose File
       </span>

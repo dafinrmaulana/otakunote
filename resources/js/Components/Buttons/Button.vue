@@ -46,7 +46,7 @@ const tag = computed(() => {
         !props.variant.includes('outline') && props.variant !== 'base',
 
       'hover:bg-slate-100 text-black ring-slate-300': props.variant === 'base',
-      'bg-violet-600 focus:ring-violet-600 hover:bg-violet-700 disabled:bg-violet-600':
+      'bg-indigo-500 focus:ring-indigo-500 hover:bg-indigo-600 disabled:bg-indigo-500':
         props.variant === 'primary',
       'bg-red-600 focus:ring-red-600 hover:bg-red-700 disabled:bg-red-600':
         props.variant === 'danger',
@@ -59,7 +59,7 @@ const tag = computed(() => {
 
       'border border-slate-200 hover:bg-slate-100 text-black ring-slate-300':
         props.variant === 'outline-base',
-      'focus:ring-violet-600 disabled:hover:!text-violet-600 text-violet-600 border border-violet-600 hover:bg-violet-600':
+      'focus:ring-indigo-500 disabled:hover:!text-indigo-500 text-indigo-500 border border-indigo-500 hover:bg-indigo-500':
         props.variant === 'outline-primary',
       'focus:ring-red-600 disabled:hover:!text-red-600 text-red-600 border border-red-600 hover:bg-red-600':
         props.variant === 'outline-danger',

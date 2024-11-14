@@ -45,7 +45,7 @@ const emits = defineEmits(["click:add-btn"]);
     </Link>
 
     <button
-      class="bg-violet-600 rounded-full flex-none size-9 p-2 grid place-items-center -translate-y-1"
+      class="bg-indigo-500 rounded-full flex-none size-9 p-2 grid place-items-center -translate-y-1"
       @click="emits('click:add-btn')"
     >
       <PlusIcon class="text-white size-full" />

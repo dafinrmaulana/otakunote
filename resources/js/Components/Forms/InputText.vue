@@ -26,7 +26,7 @@ const props = defineProps({
   <input
     class="size-full bg-transparent placeholder-shown:text-ellipsis"
     :class="{
-      '!border-red-500 focus-within:border-violet-600': props.error,
+      '!border-red-500 focus-within:border-indigo-500': props.error,
     }"
     v-model="model"
     ref="input"
@@ -36,6 +36,6 @@ const props = defineProps({
 
 <style lang="postcss">
 .input {
-  @apply rounded-md bg-slate-100 border border-slate-200 shadow-sm focus-within:ring-1 duration-100 focus-within:border-violet-600 focus-within:outline-none focus-within:ring-violet-600 h-8;
+  @apply rounded-md bg-slate-100 border border-slate-200 shadow-sm focus-within:ring-1 duration-100 focus-within:border-indigo-500 focus-within:outline-none focus-within:ring-indigo-500 h-8;
 }
 </style>

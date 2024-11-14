@@ -71,7 +71,7 @@ if (window.innerWidth < 1024) {
 
 <template>
   <aside
-    class="flex flex-col gap-2 w-64 fixed bg-white lg:bg-slate-100 inset-y-0 max-h-dvh lg:static overflow-x-hidden overflow-y-auto py-3 border-none duration-300 z-50"
+    class="flex flex-col gap-2 w-64 fixed bg-white lg:bg-slate-100 inset-y-0 max-h-dvh lg:static overflow-x-hidden overflow-y-auto py-3 border-none sm:duration-300 z-50"
     :class="{
       'left-0 lg:max-w-64 px-3 shadow lg:shadow-none': isOpen,
       '-left-64 lg:max-w-0 px-0': !isOpen,
@@ -79,7 +79,7 @@ if (window.innerWidth < 1024) {
   >
     <div class="flex items-center justify-between lg:justify-center sm:mb-5">
       <div
-        class="flex items-center lg:justify-center font-bold text-xl text-violet-600 gap-2"
+        class="flex items-center lg:justify-center font-bold text-xl text-indigo-500 gap-2"
       >
         <ApplicationLogo class="block size-8 w-auto flex-none" />
         <h3>OtakuNote</h3>
@@ -132,7 +132,7 @@ if (window.innerWidth < 1024) {
                     $page.url === `/series/${link.slug}` ? 'link-active' : ''
                   "
                 >
-                  <div class="size-4 bg-violet-600 rounded-full flex-none" />
+                  <div class="size-4 bg-indigo-500 rounded-full flex-none" />
                   <p class="line-clamp-1 flex-1">{{ link.title }}</p>
                 </Link>
               </DisclosurePanel>

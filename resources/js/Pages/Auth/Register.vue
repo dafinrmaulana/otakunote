@@ -52,7 +52,7 @@ watchEffect(() => console.log(form.errors));
     <div
       class="flex justify-start flex-col items-start sm:items-center text-start w-full gap-5 sm:gap-3"
     >
-      <ApplicationLogo class="size-10 text-violet-600" />
+      <ApplicationLogo class="size-10 text-indigo-500" />
       <div class="space-y-1 sm:text-center">
         <h1 class="font-semibold text-2xl">Welcome To Family!</h1>
         <p class="text-sm leading-4 text-gray-500">
