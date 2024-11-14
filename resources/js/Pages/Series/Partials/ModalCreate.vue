@@ -7,7 +7,11 @@ import InputSelect from "@/Components/Forms/InputSelect.vue";
 import InputText from "@/Components/Forms/InputText.vue";
 import { DialogPanel, DialogTitle } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/16/solid";
-import { TrashIcon, XMarkIcon } from "@heroicons/vue/20/solid";
+import {
+  ChevronUpDownIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/vue/20/solid";
 import { useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import { computed, ref, watch } from "vue";
@@ -139,11 +143,9 @@ const handleSearch = (query) => {
   debounceTimeout.value = setTimeout(() => {
     if (form.title !== "") {
       getRecomendations(form.title);
-      isRecomendationShow.value = true;
     } else {
       mangaRecomendations.value = [];
       animeRecomendations.value = [];
-      isRecomendationShow.value = false;
     }
   }, 300);
 };
@@ -156,6 +158,16 @@ const handleFillForm = (data) => {
   animeRecomendations.value = [];
   mangaRecomendations.value = [];
   isRecomendationShow.value = false;
+};
+
+const handleShowRecom = () => {
+  isRecomendationShow.value = !isRecomendationShow.value;
+  if (!isRecomendationShow.value) {
+    mangaRecomendations.value = [];
+    animeRecomendations.value = [];
+  } else {
+    handleSearch();
+  }
 };
 </script>
 
@@ -177,14 +189,22 @@ const handleFillForm = (data) => {
           <!-- title -->
           <div class="flex-1">
             <InputGroup label="Title">
-              <input
-                type="text"
-                class="input w-full truncate"
-                @click="isRecomendationShow = !isRecomendationShow"
-                @input="handleSearch(form.title)"
-                v-model="form.title"
-                placeholder="Konosuba, Infinite Mage etc ..."
-              />
+              <div class="flex input">
+                <input
+                  type="text"
+                  class="flex-1 w-full truncate bg-transparent border-none focus-within:ring-0"
+                  @input="handleSearch(form.title)"
+                  v-model="form.title"
+                  placeholder="Konosuba, Infinite Mage etc ..."
+                />
+                <button
+                  :class="isRecomendationShow ? 'text-black' : 'text-slate-400'"
+                  type="button"
+                  @click="handleShowRecom"
+                >
+                  <ChevronUpDownIcon class="size-4" />
+                </button>
+              </div>
             </InputGroup>
 
             <div

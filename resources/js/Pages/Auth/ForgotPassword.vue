@@ -19,9 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post(route("password.email"), {
-    onSuccess: () => router.push({ name: "login" }),
-  });
+  form.post(route("password.email"));
 };
 </script>
 
