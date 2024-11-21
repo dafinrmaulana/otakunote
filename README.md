@@ -1,4 +1,3 @@
-
 # OtakuNote - The Series Tracker 🎬📚  
 
 Track your reading and watching progress for manga, anime, dramas, and more!  
